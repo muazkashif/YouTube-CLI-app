@@ -1,6 +1,8 @@
 import typer
 from pytube import YouTube
 import os
+import  vlc
+import time
 
 app = typer.Typer()
 
@@ -35,6 +37,22 @@ def list():
         if x.endswith(".mp3"):
             # Prints only mp3 files present in directory
             print(x)
+
+@app.command()
+def play(file: str):
+    found = False
+    for x in os.listdir():
+        if x == file:
+            found = True
+            print("Playing requested file. Ctrl+C to abort or wait till time finishes.")
+            p = vlc.MediaPlayer(os.path.join(os.getcwd(), x))
+            p.play()
+            time.sleep(30)
+            p.stop()
+            #os.path.join(os.getcwd(), x)
+
+    if (found == False):
+        print("Could not find requested file. Try again.")
 
 if __name__ == "__main__":
     app()
