@@ -3,6 +3,7 @@ from pytube import YouTube
 import os
 import  vlc
 import time
+import subprocess
 
 app = typer.Typer()
 
@@ -49,10 +50,17 @@ def play(file: str):
             p.play()
             time.sleep(30)
             p.stop()
-            #os.path.join(os.getcwd(), x)
 
     if (found == False):
         print("Could not find requested file. Try again.")
+
+@app.command()
+def convert():
+    for x in os.listdir():
+        if x.endswith(".mp3"):
+            inputFile = x
+            outputFile = x.split(".")[0] + ".wav"
+            subprocess.call(['ffmpeg', '-i', inputFile, outputFile])
 
 if __name__ == "__main__":
     app()
