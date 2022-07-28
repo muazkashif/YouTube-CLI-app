@@ -1,1 +1,5 @@
-ytdl
+typer
+pytube
+vlc
+time
+subprocess
