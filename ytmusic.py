@@ -54,16 +54,20 @@ def play(file: str):
             p.stop()
 
     if (found == False):
-        print("Could not find requested file. Try again.")
+        print("Could not find requested file to play. Try again.")
 
 @app.command()
-def convert():
+def convert(file: str):
+    found = False
     for x in os.listdir("./music"):
-        if x.endswith(".mp3"):
+        if x == file:
+            found = True
             inputFile = os.path.join(os.getcwd(), "music", x)
             outputFile = inputFile.split(".")[0] + ".wav"
-            # Converts every mp3 file to wav and saves it in the same music directory.
+            # Converts this mp3 file to wav and saves it in the same music directory.
             subprocess.call(['ffmpeg', '-i', inputFile, outputFile])
+    if (found == False):
+        print("Could not find requested file to convert. Try again.")
 
 if __name__ == "__main__":
     app()
