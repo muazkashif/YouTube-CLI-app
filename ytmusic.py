@@ -62,6 +62,7 @@ def convert():
         if x.endswith(".mp3"):
             inputFile = os.path.join(os.getcwd(), "music", x)
             outputFile = inputFile.split(".")[0] + ".wav"
+            # Converts every mp3 file to wav and saves it in the same music directory.
             subprocess.call(['ffmpeg', '-i', inputFile, outputFile])
 
 if __name__ == "__main__":
