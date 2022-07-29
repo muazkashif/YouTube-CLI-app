@@ -66,6 +66,7 @@ def convert(file: str):
             outputFile = inputFile.split(".")[0] + ".wav"
             # Converts this mp3 file to wav and saves it in the same music directory.
             subprocess.call(['ffmpeg', '-i', inputFile, outputFile])
+            
     if (found == False):
         print("Could not find requested file to convert. Try again.")
 
